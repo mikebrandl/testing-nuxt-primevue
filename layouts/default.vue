@@ -37,6 +37,21 @@
         <Sidebar v-model:visible="visibleLeft" header="Left Sidebar">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </Sidebar>
+        <div class="card dock-demo">
+        <div class="flex flex-wrap gap-4 mb-8">
+            <div v-for="pos of positions" :key="pos.label" class="flex items-center">
+                <RadioButton v-model="position" :value="pos.value" :inputId="pos.label" name="dock" />
+                <label :for="pos.label" class="ml-2"> {{ pos.label }} </label>
+            </div>
+        </div>
+        <div class="dock-window">
+            <Dock :model="items2" :position="position">
+                <template #itemicon="{ item }">
+                    <img v-tooltip.top="item.label" :alt="item.label" :src="item.icon" style="width: 100%" />
+                </template>
+            </Dock>
+        </div>
+    </div>
     </div>
 </template>
 
@@ -44,6 +59,44 @@
 import { ref } from "vue";
 
 const visibleLeft = ref(false);
+
+const items2 = ref([
+    {
+        label: 'Finder',
+        icon: 'https://primefaces.org/cdn/primevue/images/dock/finder.svg'
+    },
+    {
+        label: 'App Store',
+        icon: 'https://primefaces.org/cdn/primevue/images/dock/appstore.svg'
+    },
+    {
+        label: 'Photos',
+        icon: 'https://primefaces.org/cdn/primevue/images/dock/photos.svg'
+    },
+    {
+        label: 'Trash',
+        icon: 'https://primefaces.org/cdn/primevue/images/dock/trash.png'
+    }
+]);
+const position = ref('bottom');
+const positions = ref([
+    {
+        label: 'Bottom',
+        value: 'bottom'
+    },
+    {
+        label: 'Top',
+        value: 'top'
+    },
+    {
+        label: 'Left',
+        value: 'left'
+    },
+    {
+        label: 'Right',
+        value: 'right'
+    }
+]);
 
 const items = ref([
     {
@@ -101,3 +154,20 @@ const items = ref([
     }
 ]);
 </script>
+
+<style scoped>
+.dock-demo > .dock-window {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+}
+
+.dock-demo > .p-dock {
+    z-index: 1000;
+}
+</style>
+
+Advanced
