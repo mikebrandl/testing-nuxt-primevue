@@ -31,9 +31,9 @@
             </template>
         </Menubar>
         <div class="flex gap-2 justify-content-center">
-            <Button icon="pi pi-arrow-right" @click="visibleLeft = true" />
+            <Button icon="pi pi-arrow-right" @click="visibleLeft = true" class="ml-5 mt-5" />
         </div>
-
+        <NuxtPage />
         <Sidebar v-model:visible="visibleLeft" header="Left Sidebar">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </Sidebar>
@@ -43,7 +43,7 @@
 <script setup>
 import { ref } from "vue";
 
-const visibleLeft = ref(true);
+const visibleLeft = ref(false);
 
 const items = ref([
     {
